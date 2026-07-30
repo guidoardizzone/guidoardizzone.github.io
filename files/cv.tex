@@ -1,0 +1,131 @@
+% ============================================================================
+% Web-safe CV for guidoardizzone.github.io
+% Derived from 3_Personal/CV/main.tex, with the following REMOVED for a
+% publicly indexed page (see SPEC.md section 5):
+%   - home street address
+%   - mobile phone number
+%   - citizenship
+%   - date of birth
+%   - monetary amounts of scholarships
+%   - referee email addresses (names and titles kept)
+% Email is kept; LinkedIn added.
+% To regenerate: pdflatex cv.tex  (twice, for refs)
+% ============================================================================
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usepackage{hyperref}
+\usepackage{array}
+
+\IfFileExists{fontawesome5.sty}{%
+    \usepackage{fontawesome5}%
+}{%
+    \providecommand{\faPhone}{\textbullet}%
+    \providecommand{\faEnvelope}{\textbullet}%
+    \providecommand{\faLinkedin}{[in]}%
+    \providecommand{\faGlobe}{[web]}%
+}
+
+\definecolor{cvblue}{HTML}{1F5FA8}
+\hypersetup{colorlinks=true, urlcolor=cvblue, linkcolor=cvblue, pdftitle={Guido Ardizzone -- CV}, pdfauthor={Guido Ardizzone}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\titleformat{\section}
+    {\large\bfseries\color{cvblue}}{}{0em}{}[{\color{cvblue}\titlerule[0.9pt]}]
+\titlespacing*{\section}{0pt}{10pt}{5pt}
+
+% #1 institution  #2 dates  #3 role  #4 location
+\newcommand{\cventry}[4]{%
+    \textbf{#1}\hfill\textbf{#2}\\[1pt]%
+    \textit{#3}\hfill\textit{#4}\par\vspace{6pt}}
+
+% --- Header (web-safe: no address, phone, citizenship, or DOB) ---
+\newcommand{\header}[1]{%
+    \begin{center}
+        {\Huge\scshape #1}\\[8pt]
+        \small
+        \faEnvelope\ \href{mailto:guido.ardizzone@graduateinstitute.ch}{guido.ardizzone@graduateinstitute.ch}
+        \quad
+        \faLinkedin\ \href{https://www.linkedin.com/in/guido-ardizzone-b52048174/}{Guido Ardizzone}
+    \end{center}
+}
+
+\begin{document}
+
+\header{Guido Stefano Ardizzone}
+
+%===============================================================================
+\section*{Research Fields}
+\textbf{Primary:} Sovereign Debt, Macro-Finance, Banking\\
+\textbf{Secondary:} International Finance, Sanctions and Geopolitical Risk
+
+%===============================================================================
+\section*{Education}
+\cventry{Geneva Graduate Institute (IHEID)}{Sep. 2022 -- Present}{PhD Candidate in Economics}{Geneva, Switzerland}
+\vspace{-4pt}\textit{Supervisor: Ugo Panizza. Second Reader: Rui Esteves.}\par\vspace{6pt}
+\cventry{Bocconi University}{Sep. 2018 -- Apr. 2021}{MSc in Economics and Social Sciences, \textit{cum laude}}{Milan, Italy}
+\cventry{Bocconi University}{Sep. 2015 -- Oct. 2018}{BSc in Economics and Social Sciences}{Milan, Italy}
+
+%===============================================================================
+\section*{Work Experience}
+\cventry{International Monetary Fund (IMF)}{Jun. 2026 -- Aug. 2026}{2026 Fund Internship Program (FIP)}{Washington, DC, USA}
+\cventry{The World Bank Group}{Jul. 2025 -- Aug. 2025}{Visiting PhD Student}{Washington, DC, USA}
+\cventry{Geneva Graduate Institute (IHEID)}{Jan. 2023 -- Jun. 2025}{Research Assistant to Prof. Rui Esteves (SNF project)}{Geneva, Switzerland}
+\cventry{The World Bank Group}{Jan. 2023 -- Jun. 2023}{Short-Term Consultant (part-time, remote)}{Geneva, Switzerland}
+\cventry{BAFFI CAREFIN Research Center, Bocconi University}{Sep. 2021 -- Jun. 2022}{Research Assistant (Prof. Carlo Altomonte)}{Milan, Italy}
+\cventry{UCLA Anderson School of Management}{Jul. 2021 -- Jun. 2022}{Research Assistant (Prof. Paola Giuliano, remote)}{Milan, Italy}
+\cventry{European Commission -- DG Competition}{Feb. 2021 -- Jun. 2021}{Trainee, Chief Economist Team}{Brussels, Belgium}
+
+%===============================================================================
+\section*{Teaching Experience}
+\textbf{Geneva Graduate Institute (IHEID)}\hfill\textbf{Sep. 2024 -- Present}\\[1pt]
+\textit{Teaching Assistant}\hfill\textit{Geneva, Switzerland}\par\vspace{4pt}
+\begin{tabular}{@{}p{2.6cm}l@{}}
+Fall '24, '25   & Macroeconomics I (Master)\\
+Spring '25, '26 & Microeconomics II (Master)\\
+\end{tabular}
+
+%===============================================================================
+\section*{Working Papers and Work in Progress}
+{\small (* Job Market Paper)}
+\begin{enumerate}[leftmargin=*, itemsep=0.5em, topsep=4pt]
+    \item \textbf{Sovereign Risk, Debt Maturity, and Firm Outcomes}* (Job Market Paper).
+    \item \textbf{Sanctions, Lending, and the Bank Ownership Channel}, with Matteo Ficarra.
+    \item \textbf{Senior Debt and Market Access}, with Agust\'in Velasquez and Mahamoud Islam (IMF).
+\end{enumerate}
+
+%===============================================================================
+\section*{Grants and Scholarships}
+\begin{tabular}{@{}p{2.6cm}p{\dimexpr\textwidth-2.6cm-2\tabcolsep}@{}}
+\textbf{2026} & Gallatin Excellence Scholarship --- one semester at a U.S.\ university\\[5pt]
+\textbf{2022--2026} & Excellence Scholarship, Geneva Graduate Institute (IHEID)\\[5pt]
+\textbf{2021} & Zegna Founder's Scholarship Program, Ermenegildo Zegna Group\\
+\end{tabular}
+
+%===============================================================================
+\section*{Languages and IT Skills}
+\textbf{Languages:} Italian (native); English (fluent, IELTS 8.5); Spanish (good).\\
+\textbf{Software:} Claude Code (advanced); Stata (excellent); R (good); Dynare (good); \LaTeX; MS Office.
+
+%===============================================================================
+\section*{References}
+\begin{tabular}{@{}p{0.48\textwidth}p{0.48\textwidth}@{}}
+\textbf{Prof. Ugo Panizza}\newline
+Professor of Economics and Pictet Chair in Finance and Development\newline
+Geneva Graduate Institute
+&
+\textbf{Prof. Rui Esteves}\newline
+Full Professor\newline
+Geneva Graduate Institute
+\\
+\end{tabular}
+
+\end{document}
