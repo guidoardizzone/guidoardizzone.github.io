@@ -1,0 +1,240 @@
+/* ==========================================================================
+   Guido Ardizzone — personal site
+   One stylesheet, shared across all pages. No build step, no external requests.
+   Palette: "Léman blue" — a single desaturated blue accent on warm off-white.
+   ========================================================================== */
+
+:root {
+  /* Type */
+  --font-serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Modular scale, 1.25 ratio, 18px base */
+  --step-0: 1.125rem;   /* 18px */
+  --step-1: 1.406rem;   /* ~22.5px */
+  --step-2: 1.758rem;   /* ~28px */
+  --step-3: 2.197rem;   /* ~35px */
+  --step--1: 0.9rem;    /* ~14.4px, metadata */
+
+  /* Light theme */
+  --bg: #fafaf8;
+  --fg: #1a1a1a;
+  --muted: #5a5f66;
+  --accent: #1c4a6e;      /* Léman blue */
+  --accent-hover: #123249;
+  --rule: #e2e0da;
+  --card: #f3f2ee;
+
+  --measure: 46rem;
+  --gap: 1.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14181d;
+    --fg: #e6e6e3;
+    --muted: #9aa1a9;
+    --accent: #7db4d8;      /* lighter Léman blue for contrast on dark */
+    --accent-hover: #a3cbe6;
+    --rule: #2a3038;
+    --card: #1b2027;
+  }
+}
+
+/* ------------------------------------------------------------------ Reset */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-serif);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* ------------------------------------------------------------------ Layout */
+.wrap {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+/* ------------------------------------------------------------------ Nav */
+.site-nav {
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  align-items: baseline;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+.site-nav .brand {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin-right: auto;
+}
+.site-nav a { color: var(--fg); text-decoration: none; }
+.site-nav a:hover { color: var(--accent); }
+.site-nav a[aria-current="page"] {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------ Type */
+h1, h2, h3 {
+  font-family: var(--font-sans);
+  line-height: 1.2;
+  font-weight: 650;
+}
+h1 { font-size: var(--step-3); margin: 0 0 0.25rem; letter-spacing: -0.01em; }
+.subtitle {
+  font-family: var(--font-sans);
+  font-size: var(--step-1);
+  color: var(--muted);
+  margin: 0 0 1.5rem;
+  font-weight: 400;
+}
+h2 { font-size: var(--step-2); margin: 2.5rem 0 1rem; }
+h3 { font-size: var(--step-1); margin: 2rem 0 0.5rem; }
+
+p { margin: 0 0 1rem; }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:hover { color: var(--accent-hover); }
+
+/* ------------------------------------------------------------------ Home header */
+.intro {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+.intro .photo {
+  width: 8.5rem;
+  height: 10.5rem;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+  background: var(--card);
+}
+@media (max-width: 30rem) {
+  .intro { grid-template-columns: 1fr; }
+  .intro .photo { width: 7.5rem; height: 9.25rem; }
+}
+
+.statement { max-width: 40rem; }
+
+/* ------------------------------------------------------------------ Contact */
+.contact {
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  margin-top: 1.5rem;
+  line-height: 1.9;
+}
+.contact .label { color: var(--muted); display: inline-block; min-width: 4.5rem; }
+.links { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; margin-top: 0.5rem; }
+
+/* Accent rule — the single decorative horizontal line the spec allows */
+.rule {
+  border: 0;
+  height: 2px;
+  background: var(--accent);
+  width: 3rem;
+  margin: 2.5rem 0 0;
+}
+
+/* ------------------------------------------------------------------ News */
+.news { list-style: none; padding: 0; margin: 1rem 0 0; }
+.news li {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 0.5rem 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.news .date {
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  color: var(--muted);
+  padding-top: 0.15rem;
+}
+@media (max-width: 34rem) {
+  .news li { grid-template-columns: 1fr; gap: 0.15rem; }
+}
+
+/* ------------------------------------------------------------------ Research entries */
+.paper { margin: 0 0 2rem; padding-bottom: 0.5rem; }
+.paper .title { font-weight: 700; font-size: var(--step-1); font-family: var(--font-sans); margin: 0 0 0.25rem; }
+.paper .meta { font-family: var(--font-sans); font-size: var(--step--1); color: var(--muted); margin: 0 0 0.5rem; }
+.paper .coverage { font-family: var(--font-sans); font-size: var(--step--1); }
+details.abstract { margin-top: 0.5rem; }
+details.abstract > summary {
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  cursor: pointer;
+  color: var(--accent);
+  width: max-content;
+}
+details.abstract[open] > summary { margin-bottom: 0.5rem; }
+details.abstract > p { color: var(--fg); }
+
+/* ------------------------------------------------------------------ Simple lists (teaching, cv) */
+.stack { margin: 0.5rem 0 1.5rem; padding-left: 1.1rem; }
+.stack li { margin-bottom: 0.4rem; }
+.dl { margin: 0 0 1.5rem; }
+.dl dt { font-family: var(--font-sans); font-weight: 600; font-size: var(--step--1); color: var(--muted); margin-top: 0.75rem; }
+.dl dd { margin: 0.1rem 0 0; }
+
+.cta {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  text-decoration: none;
+  margin-top: 0.5rem;
+}
+.cta:hover { background: var(--accent); color: var(--bg); }
+
+/* ------------------------------------------------------------------ Footer */
+.site-foot {
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  color: var(--muted);
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+
+/* ------------------------------------------------------------------ A11y */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  font-family: var(--font-sans); background: var(--accent); color: #fff;
+  padding: 0.5rem 1rem; z-index: 10;
+}
+.skip-link:focus { left: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ------------------------------------------------------------------ Print */
+@media print {
+  :root { --bg: #fff; --fg: #000; --muted: #333; --accent: #000; --rule: #999; }
+  body { font-size: 11pt; }
+  .site-nav, .skip-link, .cta { display: none; }
+  a { color: #000; text-decoration: underline; }
+  details.abstract { display: block; }
+  details.abstract > summary { display: none; }
+  details.abstract > p { display: block !important; }
+  .paper { page-break-inside: avoid; }
+}
