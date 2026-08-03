@@ -40,12 +40,19 @@
 
 \titleformat{\section}
     {\large\bfseries\color{cvblue}}{}{0em}{}[{\color{cvblue}\titlerule[0.9pt]}]
-\titlespacing*{\section}{0pt}{10pt}{5pt}
+\titlespacing*{\section}{0pt}{6pt}{3pt}
 
 % #1 institution  #2 dates  #3 role  #4 location
 \newcommand{\cventry}[4]{%
     \textbf{#1}\hfill\textbf{#2}\\[1pt]%
     \textit{#3}\hfill\textit{#4}\par\vspace{6pt}}
+
+% Tight bullet list under an entry (role first, then a couple of specifics)
+\newcommand{\cvbullets}[1]{%
+    \vspace{-5pt}%
+    \begin{itemize}[leftmargin=1.4em, itemsep=1.5pt, topsep=0pt, parsep=0pt, label=\textbullet]
+    #1
+    \end{itemize}\vspace{4pt}}
 
 % --- Header (web-safe: no address, phone, citizenship, or DOB) ---
 \newcommand{\header}[1]{%
@@ -63,11 +70,6 @@
 \header{Guido Stefano Ardizzone}
 
 %===============================================================================
-\section*{Research Fields}
-\textbf{Primary:} Sovereign Debt, Macro-Finance, Banking\\
-\textbf{Secondary:} International Finance, Sanctions and Geopolitical Risk
-
-%===============================================================================
 \section*{Education}
 \cventry{Geneva Graduate Institute (IHEID)}{Sep. 2022 -- Present}{PhD Candidate in Economics}{Geneva, Switzerland}
 \vspace{-4pt}\textit{Supervisor: Ugo Panizza. Second Reader: Rui Esteves.}\par\vspace{6pt}
@@ -76,13 +78,44 @@
 
 %===============================================================================
 \section*{Work Experience}
-\cventry{International Monetary Fund (IMF)}{Jun. 2026 -- Aug. 2026}{2026 Fund Internship Program (FIP)}{Washington, DC, USA}
+\cventry{International Monetary Fund (IMF)}{Jun. 2026 -- Aug. 2026}{Fund Internship Program 2026}{Washington, DC, USA}
+\cvbullets{%
+\item \textbf{Role:} Conduct research on sovereign debt in the Debt Policy Division (Strategy, Policy \& Review Department).
+\item Contribute to \textit{Senior Debt and Market Access}, joint research with two IMF economists on sovereign risk and market access.
+}
+
 \cventry{The World Bank Group}{Jul. 2025 -- Aug. 2025}{Visiting PhD Student}{Washington, DC, USA}
-\cventry{Geneva Graduate Institute (IHEID)}{Jan. 2023 -- Jun. 2025}{Research Assistant to Prof. Rui Esteves (SNF project)}{Geneva, Switzerland}
+\cvbullets{%
+\item \textbf{Role:} Conduct own doctoral research in residence at the World Bank.
+\item Conduct joint research (with my supervisor and two World Bank economists) on how different forms of sovereign debt restructuring affect macroeconomic outcomes.
+}
+
+\cventry{Geneva Graduate Institute (IHEID)}{Jan. 2023 -- Jun. 2025}{Research Assistant to Prof. Rui Esteves (SNF-funded project)}{Geneva, Switzerland}
+\cvbullets{%
+\item \textbf{Role:} Build a novel dataset of monthly domestic sovereign bond prices (1880--1945) from archival sources.
+\item Contribute to a coauthored paper (in progress) on domestic sovereign-debt restructuring in the pre-WWII period.
+}
+
 \cventry{The World Bank Group}{Jan. 2023 -- Jun. 2023}{Short-Term Consultant (part-time, remote)}{Geneva, Switzerland}
-\cventry{BAFFI CAREFIN Research Center, Bocconi University}{Sep. 2021 -- Jun. 2022}{Research Assistant (Prof. Carlo Altomonte)}{Milan, Italy}
-\cventry{UCLA Anderson School of Management}{Jul. 2021 -- Jun. 2022}{Research Assistant (Prof. Paola Giuliano, remote)}{Milan, Italy}
+\cvbullets{%
+\item \textbf{Role:} Research assistance to Alen Mulabdic --- literature review, data cleaning, and regression analysis.
+\item Contributed to two World Bank studies: Freund, Mattoo, Mulabdic \& Ruta, \href{https://www.sciencedirect.com/science/article/pii/S0022199624001387}{\textit{Is US Trade Policy Reshaping Global Supply Chains?}} (Journal of International Economics, 2024); and Mulabdic, Nayyar \& Stapleton, \href{https://openknowledge.worldbank.org/entities/publication/0860a068-a5e9-4d29-9733-67e09c4cdff1}{\textit{Growth, Structural Transformation and Carbon Emissions}} (World Bank Policy Research Working Paper 11214).
+}
+
+\cventry{BAFFI CAREFIN Research Center, Bocconi University}{Sep. 2021 -- Jun. 2022}{Research Assistant to Prof. Carlo Altomonte}{Milan, Italy}
+\cvbullets{%
+\item \textbf{Role:} Research assistance --- literature review, data collection, econometric analysis, and drafting.
+}
+
+\cventry{UCLA Anderson School of Management}{Jul. 2021 -- Jun. 2022}{Research Assistant to Prof. Paola Giuliano (remote)}{Milan, Italy}
+\cvbullets{%
+\item \textbf{Role:} Research assistance --- data gathering, econometric analysis, and drafting.
+}
+
 \cventry{European Commission -- DG Competition}{Feb. 2021 -- Jun. 2021}{Trainee, Chief Economist Team}{Brussels, Belgium}
+\cvbullets{%
+\item \textbf{Role:} Market analysis and economic research on competition cases.
+}
 
 %===============================================================================
 \section*{Teaching Experience}
@@ -95,12 +128,18 @@ Spring '25, '26 & Microeconomics II (Master)\\
 
 %===============================================================================
 \section*{Working Papers and Work in Progress}
-{\small (* Job Market Paper)}
 \begin{enumerate}[leftmargin=*, itemsep=0.5em, topsep=4pt]
-    \item \textbf{Sovereign Risk, Debt Maturity, and Firm Outcomes}* (Job Market Paper).
+    \item \textbf{Sovereign Risk, Debt Maturity, and Firm Outcomes} (Job Market Paper).
     \item \textbf{Sanctions, Lending, and the Bank Ownership Channel}, with Matteo Ficarra.
     \item \textbf{Senior Debt and Market Access}, with Agust\'in Velasquez and Mahamoud Islam (IMF).
 \end{enumerate}
+
+%===============================================================================
+\section*{Presentations}
+{\small (\textdagger\ attended by coauthor)}\par\vspace{4pt}
+\begin{tabular}{@{}p{2.6cm}p{\dimexpr\textwidth-2.6cm-2\tabcolsep}@{}}
+\textbf{2026} & IHEID--Unige Joint PhD Workshop (Geneva)\textdagger; Claude Code for Economic Research Workshop (Geneva); IHEID Brown Bag Lunch (Geneva).\\
+\end{tabular}
 
 %===============================================================================
 \section*{Grants and Scholarships}
@@ -109,6 +148,19 @@ Spring '25, '26 & Microeconomics II (Master)\\
 \textbf{2022--2026} & Excellence Scholarship, Geneva Graduate Institute (IHEID)\\[5pt]
 \textbf{2021} & Zegna Founder's Scholarship Program, Ermenegildo Zegna Group\\
 \end{tabular}
+
+%===============================================================================
+\section*{Affiliations and Professional Service}
+\textbf{Seminar Organizer}, IHEID Brown Bag Lunch PhD Seminars\hfill\textbf{2023--2026}\\[4pt]
+\textbf{Senior Fellow}, Tortuga\hfill\textbf{2021--2026}\par\vspace{1pt}
+\cvbullets{%
+\item Published articles and organised a policy research conference.
+}
+
+%===============================================================================
+\section*{Research Fields}
+\textbf{Primary:} Sovereign Debt, Macro-Finance, Banking\\
+\textbf{Secondary:} International Finance, Sanctions and Geopolitical Risk
 
 %===============================================================================
 \section*{Languages and IT Skills}
