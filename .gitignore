@@ -1,1 +1,10 @@
 .DS_Store
+
+# Local working notes — this repo is public, keep these out of it.
+.claude/
+notes/
+
+# LaTeX build artefacts from regenerating files/cv.pdf
+*.aux
+*.log
+*.out

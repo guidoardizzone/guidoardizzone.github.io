@@ -29,7 +29,7 @@
   --ink-fg: #f7f6f2;
 
   --measure: 74rem;     /* wide, airy container (Roldán ~82rem) */
-  --reading: 42rem;     /* capped measure for long-form prose */
+  --reading: 46rem;     /* capped measure for long-form pages — see .prose */
   --gap: 1.5rem;
 }
 
@@ -69,6 +69,10 @@ img { max-width: 100%; height: auto; display: block; }
   margin-inline: auto;
   padding: 1.75rem clamp(1.25rem, 4vw, 3.5rem) 5rem;
 }
+
+/* Long-form pages (research, teaching, CV) cap their measure and sit flush left.
+   Nav, footer and the home hero keep the full --measure width. */
+.prose { max-width: var(--reading); }
 
 /* ------------------------------------------------------------------ Nav */
 .site-nav {
@@ -250,6 +254,22 @@ details.abstract > p { color: var(--fg); max-width: 62ch; }
 .dl { margin: 0 0 1.5rem; }
 .dl dt { font-family: var(--font-sans); font-weight: 600; font-size: var(--step--1); color: var(--muted); margin-top: 0.75rem; }
 .dl dd { margin: 0.1rem 0 0; }
+
+/* Tight bullets under a CV position — mirrors \cvbullets in files/cv.tex */
+.role-points { margin: 0.3rem 0 0; padding-left: 1.15rem; }
+.role-points li { margin-bottom: 0.2rem; }
+
+/* Date-in-margin variant for Presentations and Grants */
+.dl-rows { display: grid; grid-template-columns: 7rem 1fr; gap: 0.75rem 1.25rem; }
+.dl-rows dt { margin-top: 0; }
+.dl-rows dd { margin: 0; }
+@media (max-width: 34rem) {
+  .dl-rows { grid-template-columns: 1fr; gap: 0.15rem; }
+  .dl-rows dd { margin-bottom: 0.7rem; }
+}
+
+/* Small sans note under a heading (e.g. the coauthor dagger key) */
+.note { font-family: var(--font-sans); font-size: var(--step--1); color: var(--muted); margin: 0 0 0.9rem; }
 
 .cta {
   display: inline-block;
