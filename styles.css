@@ -164,6 +164,10 @@ strong { font-weight: 700; }
   background: var(--card);
   box-shadow: 0 12px 30px -18px rgba(0,0,0,0.35);
 }
+@media (max-width: 60rem) {
+  .hero { grid-template-columns: minmax(0, 1fr) 12rem; gap: 2rem; }
+  .hero .photo { width: 12rem; }
+}
 @media (max-width: 40rem) {
   .hero { grid-template-columns: 1fr; gap: 1.5rem; }
   .hero .photo { width: 9rem; order: -1; }
