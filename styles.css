@@ -240,13 +240,74 @@ h1.page-title {
 .paper .title a:hover { text-decoration: underline; }
 .paper .meta { font-family: var(--font-sans); font-size: var(--step--1); color: var(--muted); margin: 0 0 0.5rem; }
 .paper .coverage { font-family: var(--font-sans); font-size: var(--step--1); }
-details.abstract { margin-top: 0.5rem; }
+/* Action row under each paper: [Abstract ▾] [Draft]. The abstract drops down
+   below the row (native <details>, no JS). The summary has a fixed width so the
+   Draft button can sit beside it and stay put when the abstract opens. */
+.paper-actions { position: relative; margin-top: 0.7rem; }
+.paper-btn,
 details.abstract > summary {
-  font-family: var(--font-sans); font-size: var(--step--1);
-  cursor: pointer; color: var(--accent); width: max-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  height: 2.1rem;
+  padding: 0 0.95rem;
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  font-weight: 550;
+  line-height: 1;
+  color: var(--fg);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
-details.abstract[open] > summary { margin-bottom: 0.5rem; }
-details.abstract > p { color: var(--fg); max-width: 62ch; }
+a.paper-btn:hover,
+details.abstract > summary:hover,
+details.abstract[open] > summary { border-color: var(--accent); color: var(--accent); }
+
+details.abstract > summary {
+  width: 7.25rem;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+details.abstract > summary::-webkit-details-marker { display: none; }
+/* Chevron: flips when the abstract is open */
+details.abstract > summary::after {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-0.12rem) rotate(45deg);
+  transition: transform 0.15s ease;
+}
+details.abstract[open] > summary::after { transform: translateY(0.12rem) rotate(225deg); }
+
+/* Draft button beside the summary: offset = summary width + gap */
+details.abstract + .paper-btn { position: absolute; top: 0; left: calc(7.25rem + 0.6rem); }
+
+/* Placeholder until the PDF exists: visible, but clearly inactive */
+.paper-btn.is-pending { color: var(--muted); border-style: dashed; cursor: default; }
+
+details.abstract > p {
+  margin: 0.6rem 0 0;
+  padding: 1rem 1.2rem;
+  max-width: 62ch;
+  color: var(--fg);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  animation: abstract-drop 0.18s ease-out;
+}
+@keyframes abstract-drop {
+  from { opacity: 0; transform: translateY(-0.35rem); }
+  to   { opacity: 1; transform: none; }
+}
 
 /* ------------------------------------------------------------------ Simple lists (teaching, cv) */
 .stack { margin: 0.5rem 0 1.5rem; padding-left: 1.1rem; }
@@ -314,7 +375,7 @@ details.abstract > p { color: var(--fg); max-width: 62ch; }
   body { font-size: 11pt; }
   .site-nav, .skip-link, .cta, .btn-row { display: none; }
   a { color: #000; text-decoration: underline; }
-  details.abstract > summary { display: none; }
-  details.abstract > p { display: block !important; }
+  details.abstract > summary, .paper-btn { display: none; }
+  details.abstract > p { display: block !important; background: none; border: 0; padding: 0; }
   .paper { page-break-inside: avoid; }
 }
