@@ -28,8 +28,7 @@
   --ink: #1e252e;         /* near-black for pill buttons */
   --ink-fg: #f7f6f2;
 
-  --measure: 74rem;     /* wide, airy container (Roldán ~82rem) */
-  --reading: 46rem;     /* capped measure for long-form pages — see .prose */
+  --measure: 60rem;     /* one centred column for every page: nav, content, footer share edges */
   --gap: 1.5rem;
 }
 
@@ -70,9 +69,8 @@ img { max-width: 100%; height: auto; display: block; }
   padding: 1.75rem clamp(1.25rem, 4vw, 3.5rem) 5rem;
 }
 
-/* Long-form pages (research, teaching, CV) cap their measure and sit flush left.
-   Nav, footer and the home hero keep the full --measure width. */
-.prose { max-width: var(--reading); }
+/* Inner pages use the full column; running text keeps a readable line length */
+.prose p { max-width: 70ch; }
 
 /* ------------------------------------------------------------------ Nav */
 .site-nav {
@@ -108,32 +106,10 @@ main h2 {
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--rule);
 }
-.section-head h2 { margin: 0; padding: 0; border: 0; }
 p { margin: 0 0 1rem; }
 a { color: var(--accent); text-underline-offset: 2px; }
 a:hover { color: var(--accent-hover); }
 strong { font-weight: 700; }
-
-/* Eyebrow kicker: short rule + letterspaced label */
-.kicker {
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--accent);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin: 0 0 1.25rem;
-}
-.kicker::before {
-  content: "";
-  width: 2rem;
-  height: 1px;
-  background: var(--accent);
-  display: inline-block;
-}
 
 /* ------------------------------------------------------------------ Hero */
 .hero {
@@ -154,7 +130,6 @@ strong { font-weight: 700; }
 .hero .intro { max-width: 60ch; }
 .hero .intro p { font-size: 1.0625rem; line-height: 1.6; margin: 0 0 0.85rem; }
 .hero .intro p:last-child { margin-bottom: 0; }
-.hero .kicker { margin-bottom: 0.9rem; }
 .hero .photo {
   width: 17rem;
   aspect-ratio: 4 / 5;
@@ -162,7 +137,6 @@ strong { font-weight: 700; }
   border-radius: 8px;
   border: 1px solid var(--rule);
   background: var(--card);
-  box-shadow: 0 12px 30px -18px rgba(0,0,0,0.35);
 }
 @media (max-width: 60rem) {
   .hero { grid-template-columns: minmax(0, 1fr) 12rem; gap: 2rem; }
@@ -197,14 +171,13 @@ strong { font-weight: 700; }
 .btn-ghost .icon { color: var(--accent); }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
-/* ------------------------------------------------------------------ Soft content card (Roldán-style) */
+/* ------------------------------------------------------------------ Flat content card */
 .card {
   background: var(--card);
   border: 1px solid var(--rule);
   border-radius: 12px;
   padding: 1.4rem 1.6rem 1.2rem;
   margin: 0 0 1.75rem;
-  box-shadow: 0 14px 34px -26px rgba(0,0,0,0.4);
 }
 .card-title {
   font-family: var(--font-serif);
@@ -224,16 +197,6 @@ h1.page-title {
   letter-spacing: -0.01em;
   margin: 0 0 0.4rem;
 }
-.subtitle {
-  font-family: var(--font-sans);
-  font-size: var(--step-1);
-  color: var(--muted);
-  margin: 0 0 1.5rem;
-  font-weight: 400;
-}
-
-/* Accent rule */
-.rule { border: 0; height: 2px; background: var(--accent); width: 3rem; margin: 2.5rem 0 0; }
 
 /* ------------------------------------------------------------------ News list */
 .news { list-style: none; padding: 0; margin: 1rem 0 0; }
@@ -256,18 +219,17 @@ h1.page-title {
 .paper .coverage { font-family: var(--font-sans); font-size: var(--step--1); }
 .paper .meta-venue { font-style: italic; margin-top: -0.35rem; }
 
-/* Research page: section headings as small letterspaced labels */
-.section-label {
+/* Small uppercase labels — one style shared by section headings and status tags */
+.section-label,
+.tag {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 650;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   color: var(--muted);
-  margin: 3rem 0 1rem;
-  padding: 0;
-  border: 0;
 }
+.section-label { margin: 3rem 0 1rem; padding: 0; border: 0; }
 /* Papers within a section are separated by hairlines */
 .paper + .paper { border-top: 1px solid var(--rule); padding-top: 1.5rem; }
 
@@ -281,13 +243,7 @@ h1.page-title {
 }
 .paper-head .title { flex: 1 1 20rem; }
 .tag {
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   white-space: nowrap;
-  color: var(--muted);
   border: 1px solid var(--rule);
   border-radius: 999px;
   padding: 0.12rem 0.6rem;
@@ -302,7 +258,6 @@ h1.page-title {
   border-radius: 12px;
   padding: 1.3rem 1.6rem 0.4rem;
   margin: 2rem 0 0;
-  box-shadow: 0 14px 34px -26px rgba(0,0,0,0.4);
 }
 .paper-featured .section-label { color: var(--accent); margin: 0 0 0.6rem; }
 .paper-featured .paper { margin-bottom: 1rem; }
@@ -373,42 +328,28 @@ details.abstract > p {
   to   { opacity: 1; transform: none; }
 }
 
-/* ------------------------------------------------------------------ Simple lists (teaching, cv) */
-.stack { margin: 0.5rem 0 1.5rem; padding-left: 1.1rem; }
-.stack li { margin-bottom: 0.4rem; }
-.dl { margin: 0 0 1.5rem; }
-.dl dt { font-family: var(--font-sans); font-weight: 600; font-size: var(--step--1); color: var(--muted); margin-top: 0.75rem; }
-.dl dd { margin: 0.1rem 0 0; }
-
-/* Tight bullets under a CV position — mirrors \cvbullets in files/cv.tex */
-.role-points { margin: 0.3rem 0 0; padding-left: 1.15rem; }
-.role-points li { margin-bottom: 0.2rem; }
-
-/* Date-in-margin variant for Presentations and Grants */
-.dl-rows { display: grid; grid-template-columns: 7rem 1fr; gap: 0.75rem 1.25rem; }
-.dl-rows dt { margin-top: 0; }
-.dl-rows dd { margin: 0; }
-@media (max-width: 34rem) {
-  .dl-rows { grid-template-columns: 1fr; gap: 0.15rem; }
-  .dl-rows dd { margin-bottom: 0.7rem; }
+/* Dated one-line entries (CV page, Policy & Teaching): date in a narrow left column */
+.vitae {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 0.55rem 1.25rem;
+  margin: 0;
 }
-
-/* Small sans note under a heading (e.g. the coauthor dagger key) */
-.note { font-family: var(--font-sans); font-size: var(--step--1); color: var(--muted); margin: 0 0 0.9rem; }
-
-.cta {
-  display: inline-block;
+.vitae dt {
   font-family: var(--font-sans);
   font-size: var(--step--1);
-  font-weight: 550;
-  padding: 0.55rem 1.05rem;
-  background: var(--ink);
-  color: var(--ink-fg);
-  border-radius: 7px;
-  text-decoration: none;
-  margin-top: 0.5rem;
+  color: var(--muted);
+  padding-top: 0.15rem;
+  white-space: nowrap;
 }
-.cta:hover { background: var(--accent); color: #fff; }
+.vitae dd { margin: 0; }
+/* Lists of linked titles read calmer without underlines; colour marks the link */
+.vitae dd a { text-decoration: none; }
+.vitae dd a:hover { text-decoration: underline; }
+@media (max-width: 34rem) {
+  .vitae { grid-template-columns: 1fr; gap: 0.1rem; }
+  .vitae dd { margin-bottom: 0.6rem; }
+}
 
 /* ------------------------------------------------------------------ Footer */
 .site-foot {
@@ -437,7 +378,7 @@ details.abstract > p {
 @media print {
   :root { --bg: #fff; --fg: #000; --muted: #333; --accent: #000; --rule: #999; --ink: #000; --ink-fg: #fff; }
   body { font-size: 11pt; }
-  .site-nav, .skip-link, .cta, .btn-row { display: none; }
+  .site-nav, .skip-link, .btn-row { display: none; }
   a { color: #000; text-decoration: underline; }
   details.abstract > summary, .paper-btn { display: none; }
   details.abstract > p { display: block !important; background: none; border: 0; padding: 0; }

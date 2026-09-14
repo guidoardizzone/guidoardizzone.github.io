@@ -16,10 +16,10 @@ python3 -m http.server 8000
 ## Structure
 
 ```
-index.html        Home
-research.html     Research
-teaching.html     Teaching
-cv.html           CV
+index.html            Home
+research.html         Research
+policy-teaching.html  Policy & Teaching (Tortuga articles + teaching)
+cv.html               CV (short summary; full PDF in files/cv.pdf)
 styles.css        Single shared stylesheet
 assets/           Photo and other images
 files/            Self-hosted PDFs (cv.pdf, paper drafts)
@@ -61,9 +61,21 @@ Fill in:
 
 Rules of thumb:
 
-- **No PDF, no title link.** Use plain text and a `Draft in progress` status line.
+- **No PDF, no title link.** Only the job market paper carries a `Draft in progress` tag.
 - **Self-host PDFs** under `files/`. No Google Drive / Dropbox / GitHub blob links.
 - **Don't invent abstracts.** Omit the `<details>` block if there's no real text.
+
+## How to add a policy article
+
+Open `policy-teaching.html` and add a `<dt>`/`<dd>` pair at the top of the
+Policy Writing list (newest first): date, linked title (`lang="it"` for Italian
+titles), then the outlet in `<em>`.
+
+## Updating the CV
+
+The full CV PDF is built from `files/cv.tex`, a copy of
+`3_Personal/CV/main_research.tex`. Edit the source there, copy it over, run
+`pdflatex cv.tex` in `files/`, and keep `cv.html` in step by hand.
 
 ## Adding the headshot
 
