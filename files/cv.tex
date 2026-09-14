@@ -1,21 +1,24 @@
-% ============================================================================
-% Web-safe CV for guidoardizzone.github.io
-% Derived from 3_Personal/CV/main.tex, with the following REMOVED for a
-% publicly indexed page (see SPEC.md section 5):
-%   - home street address
-%   - mobile phone number
-%   - citizenship
-%   - date of birth
-%   - monetary amounts of scholarships
-%   - referee email addresses (names and titles kept)
-% Email is kept; LinkedIn added.
-% To regenerate: pdflatex cv.tex  (twice, for refs)
-% ============================================================================
-\documentclass[a4paper,11pt]{article}
+%===============================================================================
+% Research CV (academic version) — layout modelled on Matteo Ficarra's CV.
+% This is the version published on guidoardizzone.github.io (files/cv.pdf),
+% so it is web-safe: no phone number, no referee emails. Scholarship amounts are
+% shown by choice (Sep 2026).
+% Private-sector version: main.tex. World Bank YPP version: main_wbg.tex.
+% To publish: compile, then copy this file to 2_Website/files/cv.tex and the
+% PDF to 2_Website/files/cv.pdf.
+%===============================================================================
+\documentclass[letterpaper,11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
-\usepackage[margin=1in]{geometry}
+\usepackage[letterpaper, left=0.5in, right=0.5in, top=0.45in, bottom=0.55in]{geometry}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
 \usepackage{enumitem}
 \usepackage{titlesec}
 \usepackage{xcolor}
@@ -23,161 +26,215 @@
 \usepackage{hyperref}
 \usepackage{array}
 
+% Icons when fontawesome5 is installed (e.g. Overleaf); nothing otherwise, so a
+% local build never prints stray bullets or "[in]".
 \IfFileExists{fontawesome5.sty}{%
     \usepackage{fontawesome5}%
+    \newcommand{\iconmail}{\faEnvelope\ }%
+    \newcommand{\iconlinkedin}{\faLinkedin\ }%
+    \newcommand{\iconweb}{\faGlobe\ }%
 }{%
-    \providecommand{\faPhone}{\textbullet}%
-    \providecommand{\faEnvelope}{\textbullet}%
-    \providecommand{\faLinkedin}{[in]}%
-    \providecommand{\faGlobe}{[web]}%
+    \newcommand{\iconmail}{}%
+    \newcommand{\iconlinkedin}{}%
+    \newcommand{\iconweb}{}%
 }
 
 \definecolor{cvblue}{HTML}{1F5FA8}
-\hypersetup{colorlinks=true, urlcolor=cvblue, linkcolor=cvblue, pdftitle={Guido Ardizzone -- CV}, pdfauthor={Guido Ardizzone}}
+\hypersetup{colorlinks=true, urlcolor=cvblue, linkcolor=cvblue,
+            pdftitle={Guido Ardizzone -- CV}, pdfauthor={Guido Ardizzone}}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 
 \titleformat{\section}
-    {\large\bfseries\color{cvblue}}{}{0em}{}[{\color{cvblue}\titlerule[0.9pt]}]
-\titlespacing*{\section}{0pt}{6pt}{3pt}
+    {\large\bfseries\color{cvblue}}{}{0em}{}[{\color{cvblue}\titlerule[0.8pt]}]
+\titlespacing*{\section}{0pt}{10pt}{6pt}
 
-% #1 institution  #2 dates  #3 role  #4 location
+% Keep a section heading with its first lines: break the page early if fewer
+% than ~5 lines remain (inline version of the needspace package).
+\usepackage{etoolbox}
+\makeatletter
+\newcommand{\keepspace}[1]{\par\penalty-100\begingroup
+    \setlength{\dimen@}{#1}\dimen@ii\pagegoal\advance\dimen@ii-\pagetotal
+    \ifdim\dimen@>\dimen@ii\ifdim\dimen@ii>\z@\vfil\fi\break\fi\endgroup}
+\makeatother
+\preto\section{\keepspace{5\baselineskip}}
+
+% Compact entry: institution / dates, then role / location in small italics
 \newcommand{\cventry}[4]{%
-    \textbf{#1}\hfill\textbf{#2}\\[1pt]%
-    \textit{#3}\hfill\textit{#4}\par\vspace{6pt}}
+    \textbf{#1}\hfill\textbf{#2}\\
+    {\small\textit{#3}}\hfill{\small\textit{#4}}\par\vspace{5pt}}
 
-% Tight bullet list under an entry (role first, then a couple of specifics)
-\newcommand{\cvbullets}[1]{%
-    \vspace{-5pt}%
-    \begin{itemize}[leftmargin=1.4em, itemsep=1.5pt, topsep=0pt, parsep=0pt, label=\textbullet]
-    #1
-    \end{itemize}\vspace{4pt}}
+% Paper: title line (bold title + coauthors/venue), then the abstract
+\newcommand{\paper}[3]{%
+    \textbf{#1}#2\par\vspace{4pt}%
+    {\small\textbf{Abstract}: \textit{#3}}\par\vspace{10pt}}
 
-% --- Header (web-safe: no address, phone, citizenship, or DOB) ---
-\newcommand{\header}[1]{%
-    \begin{center}
-        {\Huge\scshape #1}\\[8pt]
-        \small
-        \faEnvelope\ \href{mailto:guido.ardizzone@graduateinstitute.ch}{guido.ardizzone@graduateinstitute.ch}
-        \quad
-        \faLinkedin\ \href{https://www.linkedin.com/in/guido-ardizzone-b52048174/}{Guido Ardizzone}
-    \end{center}
-}
+% Press piece: linked title -- outlet, date
+\newcommand{\press}[3]{%
+    \href{#1}{#2} -- \textit{#3}\par\vspace{4pt}}
+
+% Two-column rows (date | content)
+\newenvironment{rows}{%
+    \begin{tabular}{@{}p{2.8cm}p{\dimexpr\textwidth-2.8cm-2\tabcolsep}@{}}}%
+    {\end{tabular}}
 
 \begin{document}
 
-\header{Guido Stefano Ardizzone}
+%===============================================================================
+\begin{center}
+    {\Huge\scshape\textcolor{cvblue}{Guido Ardizzone}}\\[6pt]
+    {\small Last Update: September 2026}\\[3pt]
+    {\small
+    \iconmail\href{mailto:guido.ardizzone@graduateinstitute.ch}{guido.ardizzone@graduateinstitute.ch}
+    \quad\textperiodcentered\quad
+    \iconlinkedin\href{https://www.linkedin.com/in/guido-ardizzone-b52048174/}{LinkedIn}
+    \quad\textperiodcentered\quad
+    \iconweb\href{https://guidoardizzone.github.io}{guidoardizzone.github.io}}
+\end{center}
+\vspace{-6pt}
+
+%===============================================================================
+\section*{Research Fields}
+
+\textbf{Primary:} Sovereign Debt, Macro-Finance, Banking\\[2pt]
+\textbf{Secondary:} International Finance, Sanctions and Geopolitical Risk
 
 %===============================================================================
 \section*{Education}
-\cventry{Geneva Graduate Institute (IHEID)}{Sep. 2022 -- Present}{PhD Candidate in Economics}{Geneva, Switzerland}
-\vspace{-4pt}\textit{Supervisor: Ugo Panizza. Second Reader: Rui Esteves.}\par\vspace{6pt}
-\cventry{Bocconi University}{Sep. 2018 -- Apr. 2021}{MSc in Economics and Social Sciences, \textit{cum laude}}{Milan, Italy}
+
+\cventry{Geneva Graduate Institute (IHEID)}{Sep. 2022 -- Present}{PhD in Economics}{Geneva, Switzerland}
+\vspace{-4pt}{\small Supervisor: Ugo Panizza. Second reader: Rui Esteves.}\par\vspace{6pt}
+
+\cventry{Bocconi University}{Sep. 2018 -- Apr. 2021}{MSc in Economics and Social Sciences, cum laude}{Milan, Italy}
+
 \cventry{Bocconi University}{Sep. 2015 -- Oct. 2018}{BSc in Economics and Social Sciences}{Milan, Italy}
 
 %===============================================================================
 \section*{Work Experience}
-\cventry{International Monetary Fund (IMF)}{Jun. 2026 -- Aug. 2026}{Fund Internship Program 2026}{Washington, DC, USA}
-\cvbullets{%
-\item \textbf{Role:} Conduct research on sovereign debt in the Debt Policy Division (Strategy, Policy \& Review Department).
-\item Contribute to \textit{Senior Debt and Market Access}, joint research with two IMF economists on sovereign risk and market access.
-}
+
+\cventry{International Monetary Fund (IMF)}{Jun. 2026 -- Aug. 2026}{Fund Intern, Debt Policy Division (Strategy, Policy \& Review Department)}{Washington, DC, USA}
 
 \cventry{The World Bank Group}{Jul. 2025 -- Aug. 2025}{Visiting PhD Student}{Washington, DC, USA}
-\cvbullets{%
-\item \textbf{Role:} Conduct own doctoral research in residence at the World Bank.
-\item Conduct joint research (with my supervisor and two World Bank economists) on how different forms of sovereign debt restructuring affect macroeconomic outcomes.
-}
 
 \cventry{Geneva Graduate Institute (IHEID)}{Jan. 2023 -- Jun. 2025}{Research Assistant to Prof. Rui Esteves (SNF-funded project)}{Geneva, Switzerland}
-\cvbullets{%
-\item \textbf{Role:} Build a novel dataset of monthly domestic sovereign bond prices (1880--1945) from archival sources.
-\item Contribute to a coauthored paper (in progress) on domestic sovereign-debt restructuring in the pre-WWII period.
-}
 
 \cventry{The World Bank Group}{Jan. 2023 -- Jun. 2023}{Short-Term Consultant (part-time, remote)}{Geneva, Switzerland}
-\cvbullets{%
-\item \textbf{Role:} Research assistance to Alen Mulabdic --- literature review, data cleaning, and regression analysis.
-\item Contributed to two World Bank studies: Freund, Mattoo, Mulabdic \& Ruta, \href{https://www.sciencedirect.com/science/article/pii/S0022199624001387}{\textit{Is US Trade Policy Reshaping Global Supply Chains?}} (Journal of International Economics, 2024); and Mulabdic, Nayyar \& Stapleton, \href{https://openknowledge.worldbank.org/entities/publication/0860a068-a5e9-4d29-9733-67e09c4cdff1}{\textit{Growth, Structural Transformation and Carbon Emissions}} (World Bank Policy Research Working Paper 11214).
-}
 
-\cventry{BAFFI CAREFIN Research Center, Bocconi University}{Sep. 2021 -- Jun. 2022}{Research Assistant to Prof. Carlo Altomonte}{Milan, Italy}
-\cvbullets{%
-\item \textbf{Role:} Research assistance --- literature review, data collection, econometric analysis, and drafting.
-}
+\cventry{BAFFI CAREFIN Research Center, Bocconi University}{Sep. 2021 -- Jun. 2022}{Research Assistant (Carlo Altomonte)}{Milan, Italy}
 
-\cventry{UCLA Anderson School of Management}{Jul. 2021 -- Jun. 2022}{Research Assistant to Prof. Paola Giuliano (remote)}{Milan, Italy}
-\cvbullets{%
-\item \textbf{Role:} Research assistance --- data gathering, econometric analysis, and drafting.
-}
+\cventry{UCLA Anderson School of Management}{Jul. 2021 -- Jun. 2022}{Research Assistant (Paola Giuliano, remote)}{Milan, Italy}
 
-\cventry{European Commission -- DG Competition}{Feb. 2021 -- Jun. 2021}{Trainee, Chief Economist Team}{Brussels, Belgium}
-\cvbullets{%
-\item \textbf{Role:} Market analysis and economic research on competition cases.
-}
+\cventry{European Commission}{Feb. 2021 -- Jun. 2021}{Trainee, Chief Economist Team, DG Competition}{Brussels, Belgium}
 
 %===============================================================================
 \section*{Teaching Experience}
-\textbf{Geneva Graduate Institute (IHEID)}\hfill\textbf{Sep. 2024 -- Present}\\[1pt]
-\textit{Teaching Assistant}\hfill\textit{Geneva, Switzerland}\par\vspace{4pt}
-\begin{tabular}{@{}p{2.6cm}l@{}}
-Fall '24, '25   & Macroeconomics I (Master)\\
-Spring '25, '26 & Microeconomics II (Master)\\
-\end{tabular}
 
-%===============================================================================
-\section*{Working Papers and Work in Progress}
-\begin{enumerate}[leftmargin=*, itemsep=0.5em, topsep=4pt]
-    \item \textbf{Sovereign Risk, Debt Maturity, and Firm Outcomes} (Job Market Paper).
-    \item \textbf{Sanctions, Lending, and the Bank Ownership Channel}, with Matteo Ficarra.
-    \item \textbf{Senior Debt and Market Access}, with Agust\'in Velasquez and Mahamoud Islam (IMF).
-\end{enumerate}
-
-%===============================================================================
-\section*{Presentations}
-{\small (\textdagger\ attended by coauthor)}\par\vspace{4pt}
-\begin{tabular}{@{}p{2.6cm}p{\dimexpr\textwidth-2.6cm-2\tabcolsep}@{}}
-\textbf{2026} & IHEID--Unige Joint PhD Workshop (Geneva)\textdagger; Claude Code for Economic Research Workshop (Geneva); IHEID Brown Bag Lunch (Geneva).\\
-\end{tabular}
+\cventry{Geneva Graduate Institute (IHEID)}{Sep. 2024 -- Present}{Teaching Assistant}{Geneva, Switzerland}
+\vspace{-2pt}
+\begin{rows}
+Fall '24, '25   & Macroeconomics I (Master)\\[2pt]
+Spring '25, '26 & Microeconomics II (Master)
+\end{rows}
 
 %===============================================================================
 \section*{Grants and Scholarships}
-\begin{tabular}{@{}p{2.6cm}p{\dimexpr\textwidth-2.6cm-2\tabcolsep}@{}}
-\textbf{2026} & Gallatin Excellence Scholarship --- one semester at a U.S.\ university\\[5pt]
-\textbf{2022--2026} & Excellence Scholarship, Geneva Graduate Institute (IHEID)\\[5pt]
-\textbf{2021} & Zegna Founder's Scholarship Program, Ermenegildo Zegna Group\\
-\end{tabular}
+
+\begin{rows}
+2026       & Gallatin Excellence Scholarship (USD 20{,}000), visiting semester at the \href{https://psfl.princeton.edu/}{Princeton Sovereign Finance Lab}\\[3pt]
+2022--2026 & IHEID Excellence Scholarship\\[3pt]
+2021       & Zegna Founder's Scholarship Program, Ermenegildo Zegna Group (USD 5{,}000)
+\end{rows}
 
 %===============================================================================
-\section*{Affiliations and Professional Service}
-\textbf{Seminar Organizer}, IHEID Brown Bag Lunch PhD Seminars\hfill\textbf{2023--2026}\\[4pt]
-\textbf{Senior Fellow}, Tortuga\hfill\textbf{2021--2026}\par\vspace{1pt}
-\cvbullets{%
-\item Published articles and organised a policy research conference.
-}
+% Research starts on its own page so abstracts are never split from their titles.
+\clearpage
+\section*{Working Papers and Work in Progress {\normalsize\mdseries(* Job Market Paper)}}
+\vspace{2pt}
+
+% TODO: JMP abstract — add as the third argument once supplied (do not invent).
+\textbf{Sovereign Risk, Debt Maturity, and Firm Outcomes*}\par\vspace{10pt}
+
+\paper{Senior Debt and Market Access}{ with Agust\'in Velasquez and Mahamoud Islam}{%
+Multilateral lending is a significant component of sovereign debt in emerging and
+developing economies. Because multilateral creditors receive de facto preferred creditor
+treatment, a larger stock of multilateral claims can affect the pricing of private
+sovereign debt through two opposing channels. On the one hand, official lending can ease
+financing constraints and rollover pressure, reducing the likelihood of distress. On the
+other hand, the seniority of multilateral claims leaves private creditors with a smaller
+residual claim in states of distress, potentially increasing their required compensation.
+We study how these forces interact using an annual panel of 55 emerging and developing
+economies over 2004--2024. We measure senior creditor exposure as the share of external
+public and publicly guaranteed debt owed to multilateral creditors and relate it to
+sovereign spreads from the JP Morgan EMBI Global. Using a quadratic specification with
+country and year fixed effects, we find that (i) on average, the relationship between
+senior creditor exposure and sovereign spreads is non-linear, with the marginal
+association becoming positive at about 40 percent of external debt; (ii) the
+non-linearity is state dependent and concentrated among more vulnerable sovereigns; and
+(iii) it is specific to multilateral creditor exposure, consistent with the role of de
+facto seniority. The results are robust to alternative specifications, additional
+controls, global risk factors, and excluding IMF credit from the exposure measure. We
+interpret the evidence as consistent with a trade-off between the catalytic benefits of
+official finance and the dilution of private claims created by senior creditor exposure.}
+
+\paper{Sanctions, Lending, and the Bank Ownership Channel}{ with \href{https://sites.google.com/view/matteoficarra/home-page}{Matteo Ficarra}}{%
+This paper examines the impact of sanctions on bank lending with a focus on the role of
+bank ownership. Using balance sheet and ownership data for over 1,800 banks in 56
+emerging market economies and 259 sanction episodes between 1995 and 2020, we find that
+in response to sanctions foreign banks significantly reduce credit supply, particularly
+to firms, in line with a flight-to-safety type of behaviour. As private domestic banks
+are unable to increase lending, state-owned banks partially absorb credit demand by
+expanding loans to both firms and households, suggesting a countercyclical response.
+This asymmetric response is consistent across different sanction types, but particularly
+strong for trade and financial sanctions. Our findings unveil a new channel to assess
+the effectiveness of sanctions, highlighting the importance of banks' ownership
+structure, and offers novel insights on the response of cross-border credit flows to
+sanctions.}
 
 %===============================================================================
-\section*{Research Fields}
-\textbf{Primary:} Sovereign Debt, Macro-Finance, Banking\\
-\textbf{Secondary:} International Finance, Sanctions and Geopolitical Risk
+% Pieces are bylined collectively to the Tortuga think tank (no individual authors).
+\section*{Policy Publications and Press {\normalsize\mdseries(written with Tortuga)}}
+
+\press{https://lavoce.info/archives/111182/campioni-europei-di-debito/}{Campioni europei di debito}{lavoce.info, 28/04/2026}
+\press{https://lavoce.info/archives/102561/nadef-e-patto-di-stabilita-il-diavolo-e-nei-dettagli/}{Nadef e Patto di stabilità: il diavolo è nei dettagli}{lavoce.info, 24/10/2023}
+\press{https://www.econopoly.ilsole24ore.com/2023/01/18/riforma-patto-stabilita-crescita/}{Perché la riforma del Patto di Stabilità e Crescita così com'è non va}{Econopoly (Il Sole 24 Ore), 18/01/2023}
+\press{https://www.fanpage.it/politica/quanto-costa-realizzare-il-programma-elettorale-del-partito-democratico/}{Quanto costa realizzare il programma elettorale del Partito Democratico}{Fanpage.it, 14/09/2022}
+\press{https://www.fanpage.it/politica/quanto-costa-realizzare-il-programma-elettorale-del-terzo-polo-di-azione-e-italia-viva/}{Quanto costa realizzare il programma elettorale del Terzo polo di Azione e Italia Viva}{Fanpage.it, 12/09/2022}
+
+%===============================================================================
+\section*{Presentations}
+
+\begin{rows}
+2026      & IMF Debt Policy Division Seminar (Washington, DC)\\[3pt]
+2025--2026 & IHEID--UNIGE Joint PhD Workshop (Geneva), Claude Code for Economic Research Workshop (Geneva), IHEID Brown Bag Lunch (Geneva)
+\end{rows}
+
+%===============================================================================
+\section*{Other Professional Services}
+
+Seminar Organizer: \textit{IHEID Brown Bag Lunch PhD Seminars (2023--2026)}
+
+%===============================================================================
+\section*{Research Affiliations}
+
+\cventry{\href{https://www.tortuga-econ.it/}{Tortuga}}{2021 -- 2026}{Senior Fellow}{}
 
 %===============================================================================
 \section*{Languages and IT Skills}
-\textbf{Languages:} Italian (native); English (fluent, IELTS 8.5); Spanish (good).\\
-\textbf{Software:} Claude Code (advanced); Stata (excellent); R (good); Dynare (good); \LaTeX; MS Office.
+
+\begin{itemize}[leftmargin=1.2em, itemsep=1pt, topsep=0pt, label=\textbullet]
+    \item \textbf{Languages}: Italian (native), English (fluent, IELTS 8.5), Spanish (good)
+    \item \textbf{Software}: Stata, R, Dynare, \LaTeX, Claude Code, MS Office
+\end{itemize}
 
 %===============================================================================
 \section*{References}
+
+% Web-safe: referee email addresses removed (available on request).
 \begin{tabular}{@{}p{0.48\textwidth}p{0.48\textwidth}@{}}
-\textbf{Prof. Ugo Panizza}\newline
-Professor of Economics and Pictet Chair in Finance and Development\newline
-Geneva Graduate Institute
-&
-\textbf{Prof. Rui Esteves}\newline
-Full Professor\newline
-Geneva Graduate Institute
-\\
+Prof. Ugo Panizza                                         & Prof. Rui Esteves\\
+Professor of Economics and Pictet Chair in Finance and Development & Full Professor\\
+Geneva Graduate Institute (IHEID)                         & Geneva Graduate Institute (IHEID)
 \end{tabular}
 
 \end{document}
