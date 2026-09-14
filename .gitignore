@@ -4,6 +4,11 @@
 .claude/
 notes/
 
+# Original full-size source images kept in the repo root for reference.
+# Web-ready copies live in assets/ and are tracked.
+/15986347-geneva-by-night.jpg
+/img_4179.webp
+
 # LaTeX build artefacts from regenerating files/cv.pdf
 *.aux
 *.log
