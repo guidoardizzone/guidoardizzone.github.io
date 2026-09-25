@@ -79,8 +79,8 @@ The full CV PDF is built from `files/cv.tex`, a copy of
 
 ## Adding the headshot
 
-Drop a photo at `assets/photo.jpg` and change the `src` in `index.html` from
-`assets/photo-placeholder.svg` to `assets/photo.jpg`.
+Drop a photo at `assets/headshot.jpg` and change the `src` in `index.html` from
+`assets/photo-placeholder.svg` to `assets/headshot.jpg`.
 
 ## Updating the sitemap
 

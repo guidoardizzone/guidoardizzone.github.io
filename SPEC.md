@@ -27,7 +27,7 @@ time, in this order, and paste my answers verbatim into the HTML:
 1. **Abstracts.** Ask me for the abstract of each paper, one paper at a time, in the
    order they appear in section 3. If I say "skip" for one, render the entry without an
    abstract block rather than inventing one.
-2. **Headshot.** Ask me to drop a photo at `assets/photo.jpg`. If I haven't supplied
+2. **Headshot.** Ask me to drop a photo at `assets/headshot.jpg`. If I haven't supplied
    one by the end of the build, use a neutral placeholder and tell me it's outstanding.
 3. **Google Scholar URL.** I may not have a profile yet. If I don't, omit the link
    entirely rather than linking to a search page.
@@ -68,7 +68,7 @@ Above the fold, in this order:
 
 1. **Guido Ardizzone**
 2. PhD Candidate in Economics, Geneva Graduate Institute (IHEID)
-3. Photo at `assets/photo.jpg`
+3. Photo at `assets/headshot.jpg`
 4. Research statement (draft below — show it to me for approval before using)
 5. Email: `guido.ardizzone@graduateinstitute.ch`
 6. Links: [LinkedIn](https://www.linkedin.com/in/guido-ardizzone-b52048174/),
