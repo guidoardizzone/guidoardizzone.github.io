@@ -16,24 +16,30 @@
 
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="bg-vitae">
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- Photo banner (inner pages only): nav + page title over the page photo -->
+  <header class="banner">
+    <div class="wrap banner-inner">
+      <!-- SHARED NAV — keep identical across all four pages -->
+      <nav class="site-nav" aria-label="Primary">
+        <span class="brand"><a href="index.html">Guido Ardizzone</a></span>
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="cv.html" aria-current="page">Vitae</a>
+        <a href="teaching-writing.html">Teaching &amp; Writing</a>
+      </nav>
+      <!-- /SHARED NAV -->
+      <h1 class="page-title banner-title">Vitae</h1>
+    </div>
+  </header>
+
   <div class="wrap">
-    <!-- SHARED NAV — keep identical across all four pages -->
-    <nav class="site-nav" aria-label="Primary">
-      <span class="brand"><a href="index.html">Guido Ardizzone</a></span>
-      <a href="index.html">Home</a>
-      <a href="research.html">Research</a>
-      <a href="cv.html" aria-current="page">Vitae</a>
-      <a href="teaching-writing.html">Teaching &amp; Writing</a>
-    </nav>
-    <!-- /SHARED NAV -->
 
     <!-- Short summary in the style of Matteo Ficarra's "Vitae" page. The full CV is
          files/cv.pdf, built from files/cv.tex (source: 2_University/1-Job Hunt/1_Resources/1.CV/main_research.tex). -->
     <main id="main" class="prose">
-      <h1 class="page-title">Vitae</h1>
       <p>You can find my CV <a href="files/cv.pdf" target="_blank" rel="noopener">here</a>.</p>
 
       <section aria-labelledby="edu-h">
