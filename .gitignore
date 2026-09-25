@@ -8,8 +8,10 @@ notes/
 # Web-ready copies live in assets/ and are tracked.
 /15986347-geneva-by-night.jpg
 /img_4179.webp
+/headshot-original.jpg
 
 # LaTeX build artefacts from regenerating files/cv.pdf
 *.aux
 *.log
 *.out
+/headshot-original-*.jpg

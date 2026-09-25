@@ -18,8 +18,8 @@ python3 -m http.server 8000
 ```
 index.html            Home
 research.html         Research
-policy-teaching.html  Policy & Teaching (Tortuga articles + teaching)
-cv.html               CV (short summary; full PDF in files/cv.pdf)
+cv.html               Vitae (short summary; full PDF in files/cv.pdf)
+teaching-writing.html Teaching & Writing (teaching + Tortuga articles)
 styles.css        Single shared stylesheet
 assets/           Photo and other images
 files/            Self-hosted PDFs (cv.pdf, paper drafts)
@@ -67,14 +67,14 @@ Rules of thumb:
 
 ## How to add a policy article
 
-Open `policy-teaching.html` and add a `<dt>`/`<dd>` pair at the top of the
+Open `teaching-writing.html` and add a `<dt>`/`<dd>` pair at the top of the
 Policy Writing list (newest first): date, linked title (`lang="it"` for Italian
 titles), then the outlet in `<em>`.
 
 ## Updating the CV
 
 The full CV PDF is built from `files/cv.tex`, a copy of
-`3_Personal/CV/main_research.tex`. Edit the source there, copy it over, run
+`2_University/1-Job Hunt/1_Resources/1.CV/main_research.tex`. Edit the source there, copy it over, run
 `pdflatex cv.tex` in `files/`, and keep `cv.html` in step by hand.
 
 ## Adding the headshot

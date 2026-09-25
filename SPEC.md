@@ -112,10 +112,10 @@ Entry format for each paper:
 Content:
 
 **Job Market Paper**
-- *Sovereign Risk, Debt Maturity, and Firm Outcomes*
+- *Sovereign Risk and Firm Debt Maturity*
 - Single-authored
 - Status: Draft in progress. **No PDF link** — no circulatable draft exists yet.
-- Abstract: ask me (interactive step 1)
+- Abstract: supplied 2026-09-22, matches the draft's abstract
 
 **Working Papers**
 - *Senior Debt and Market Access*, with

@@ -21,14 +21,14 @@
   --bg: #faf9f6;
   --fg: #1a1a1a;
   --muted: #5a5f66;
-  --accent: #1c4a6e;      /* Léman blue */
-  --accent-hover: #123249;
-  --rule: #e4e1d9;
-  --card: #f2f0ea;
+  --accent: #1f5fa8;      /* same blue as the CV PDF (cvblue); ~6:1 on --bg */
+  --accent-hover: #174a85;
+  --rule: #e4e2dc;
+  --card: #ffffff;        /* clean white panels with a hairline border */
   --ink: #1e252e;         /* near-black for pill buttons */
   --ink-fg: #f7f6f2;
 
-  --measure: 60rem;     /* one centred column for every page: nav, content, footer share edges */
+  --measure: 76rem;     /* one centred column for every page: nav, content, footer share edges */
   --gap: 1.5rem;
 }
 
@@ -37,8 +37,8 @@
     --bg: #14181d;
     --fg: #e6e6e3;
     --muted: #9aa1a9;
-    --accent: #7db4d8;
-    --accent-hover: #a3cbe6;
+    --accent: #86b4ea;
+    --accent-hover: #aecdf2;
     --rule: #2a3038;
     --card: #1b2027;
     --ink: #e9e9e6;
@@ -114,31 +114,35 @@ strong { font-weight: 700; }
 /* ------------------------------------------------------------------ Hero */
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 17rem;
-  gap: 3.5rem;
+  grid-template-columns: minmax(0, 1fr) 21rem;
+  gap: 4.5rem;
   align-items: center;
   margin: 1rem 0 3rem;
 }
 .hero .name {
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: clamp(2.3rem, 4.4vw, 3.4rem);
+  font-size: clamp(2.3rem, 4.4vw, 3.8rem);
   line-height: 1.03;
   letter-spacing: -0.015em;
   margin: 0 0 1.15rem;
 }
-.hero .intro { max-width: 60ch; }
-.hero .intro p { font-size: 1.0625rem; line-height: 1.6; margin: 0 0 0.85rem; }
+.hero .intro { max-width: 64ch; }
+.hero .intro p { font-size: 1.125rem; line-height: 1.65; margin: 0 0 0.9rem; }
 .hero .intro p:last-child { margin-bottom: 0; }
 .hero .photo {
-  width: 17rem;
+  width: 21rem;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: 8px;
   border: 1px solid var(--rule);
   background: var(--card);
 }
-@media (max-width: 60rem) {
+@media (max-width: 72rem) {
+  .hero { grid-template-columns: minmax(0, 1fr) 16rem; gap: 3rem; }
+  .hero .photo { width: 16rem; }
+}
+@media (max-width: 56rem) {
   .hero { grid-template-columns: minmax(0, 1fr) 12rem; gap: 2rem; }
   .hero .photo { width: 12rem; }
 }
@@ -314,7 +318,7 @@ details.abstract + .paper-btn { position: absolute; top: 0; left: calc(7.25rem +
 details.abstract > p {
   margin: 0.6rem 0 0;
   padding: 1rem 1.2rem;
-  max-width: 62ch;
+  max-width: 80ch;
   color: var(--fg);
   font-size: 1.0625rem;
   line-height: 1.6;
