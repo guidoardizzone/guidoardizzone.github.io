@@ -17,3 +17,5 @@ notes/
 /headshot-original-*.jpg
 /IMG_*.jpeg
 /IMG_*.JPG
+*.fdb_latexmk
+*.fls
