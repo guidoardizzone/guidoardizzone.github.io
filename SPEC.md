@@ -198,8 +198,8 @@ Google will index. Before anything goes in `files/`:
 
 - Produce a web version of the CV with those four items removed. Keep the email.
 - Drop the monetary amounts attached to scholarships.
-- Keep the referees' names and titles but consider removing their email addresses,
-  since publishing a senior colleague's address invites scraping. Ask me which I prefer.
+- Keep the referees' names and titles. **Referee emails stay in the PDF** (Guido's
+  decision, 2026-09-28: recruiters should be able to click them). `cv.html` lists no referees.
 - Show me a diff or a summary of what you removed before you commit the file.
 
 Apply the same rules to `cv.html`.
