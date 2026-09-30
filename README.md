@@ -77,10 +77,11 @@ The full CV PDF is built from `files/cv.tex`, a copy of
 `2_University/1-Job Hunt/1_Resources/1.CV/main_research.tex`. Edit the source there, copy it over, run
 `pdflatex cv.tex` in `files/`, and keep `cv.html` in step by hand.
 
-## Adding the headshot
+## Photos
 
-Drop a photo at `assets/headshot.jpg` and change the `src` in `index.html` from
-`assets/photo-placeholder.svg` to `assets/headshot.jpg`.
+- Headshot: `assets/headshot.jpg` (680×850, 4:5 crop). Banner photos on the inner pages:
+  `assets/bg/` (≤ 2000 px wide), set per page in `styles.css` (`.bg-research`, `.bg-vitae`, `.bg-teaching`).
+- Full-size originals live in `_originals/` (`used/`, `unused/`), which is gitignored.
 
 ## Updating the sitemap
 
